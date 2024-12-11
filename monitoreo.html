@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo de Red</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function enviarNotificacion() {
+            const evento = document.getElementById("evento").value;
+            if (evento.trim() === "") {
+                alert("Por favor, describe el evento o incidente antes de enviar.");
+                return;
+            }
+
+            // Mostrar el evento en el log de la página
+            const logContainer = document.getElementById("logContainer");
+            const nuevaNotificacion = document.createElement("div");
+            nuevaNotificacion.classList.add("notificacion");
+            nuevaNotificacion.textContent = "Evento reportado: " + evento;
+
+            // Agregar la nueva notificación al contenedor de logs
+            logContainer.appendChild(nuevaNotificacion);
+
+            // Limpiar el campo de entrada
+            document.getElementById("evento").value = "";
+
+            // Mostrar alerta de éxito
+            alert("Evento reportado con éxito: " + evento);
+
+            // Almacenar el evento en el LocalStorage bajo "quejas"
+            const quejasExistentes = JSON.parse(localStorage.getItem("quejas")) || [];
+            quejasExistentes.push(evento);
+            localStorage.setItem("quejas", JSON.stringify(quejasExistentes));
+
+            // Actualizar la lista en la página de administración sin recargar
+            if (window.localStorage.getItem("quejas")) {
+                const event = new Event('storage'); // Crear un evento para disparar el cambio en la administración
+                window.dispatchEvent(event);
+            }
+
+            // Simular un log de eventos para el backend
+            console.log("Evento de red enviado:", evento);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Monitoreo de Red</h1>
+        <nav>
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="configuracion.html">Configuración Avanzada</a></li>
+                <li><a href="monitoreo.html" class="active">Monitoreo de Red</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="soporte.html">Soporte Técnico</a></li>
+                <li><a href="documentacion.html">Documentación</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Reporte de Eventos en Tiempo Real</h2>
+        <p>Completa el formulario para reportar un evento o incidente en la red.</p>
+        <form onsubmit="event.preventDefault(); enviarNotificacion();">
+            <label for="evento">Describe el evento o incidente:</label>
+            <textarea id="evento" name="evento" rows="5" placeholder="Ejemplo: Latencia alta detectada en el servidor 192.168.0.1"></textarea>
+            <br>
+            <button type="submit">Reportar Evento</button>
+        </form>
+
+        <section>
+            <h3>Log de Monitoreo</h3>
+            <p>Eventos recientes reportados:</p>
+            <div id="logContainer" class="log-container">
+                <!-- Los eventos reportados se mostrarán aquí -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

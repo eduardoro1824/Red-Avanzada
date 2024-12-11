@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+   
+        /* Modificar el estilo del formulario para cambiar el orden */
+        #signupForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #signupForm select {
+            order: -1; /* Esto coloca el campo "Rol" al principio */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="img/WhatsApp Image 2024-10-31 at 4.57.29 PM.jpeg" alt="NERA'S Logo">
+        <h1>Network Efficiency and Routing Analysis</h1>
+    </header>
+
+    <div class="container2">
+        <div class="screen welcome-screen active">
+            <div class="content">
+                <h1>Bienvenido</h1>
+                <p></p>
+                <div class="buttons">
+                    <button class="btn" id="openSignInModal">Iniciar Sesión</button>
+                    <button class="btn" id="openSignUpModal">Registrarse</button>
+                    <button class="btn" onclick="window.location.href='membresias.html'">Ver Membresías</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Sign Up -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content2">
+            <h2>Registrarse</h2><br>
+            <label>Rol</label>
+            <select id="signupRole">
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+            </select>
+            <form id="signupForm">
+                <label>Nombre del Usuario</label>
+                <input type="text" id="signupUsername" placeholder="Enter your username">
+                <label>Contraseña</label>
+                <input type="password" id="signupPassword" placeholder="Enter your password">
+                <label>Correo Electrónico</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email">
+                <label>Teléfono</label>
+                <input type="tel" id="signupPhone" placeholder="Enter your phone number">
+            
+                <button type="submit" class="btn">Registrarse</button>
+            </form>
+            <button type="button" class="close-modal2" id="closeSignUpModal">x</button>
+        </div>
+    </div>
+
+    <!-- Modal para descripción del rol -->
+    <div class="modal" id="roleDescriptionModal">
+        <div class="modal-content">
+            <h2>Descripción del Rol</h2>
+            <p id="roleDescriptionText"></p>
+            <button class="btn" id="closeRoleDescriptionModal">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        const signUpModal = document.getElementById('signUpModal');
+        const openSignUpModal = document.getElementById('openSignUpModal');
+        const closeSignUpModal = document.getElementById('closeSignUpModal');
+    
+        const signupRole = document.getElementById('signupRole');
+        const roleDescriptionModal = document.getElementById('roleDescriptionModal');
+        const roleDescriptionText = document.getElementById('roleDescriptionText');
+        const closeRoleDescriptionModal = document.getElementById('closeRoleDescriptionModal');
+    
+        // Descripciones de roles
+        const roleDescriptions = {
+            user: "Usuario: Acceso limitado a funcionalidades básicas de la plataforma.",
+            admin: "Administrador: Control total sobre las configuraciones y usuarios."
+        };
+    
+        // Abrir modal de registro
+        openSignUpModal.addEventListener('click', () => {
+            signUpModal.classList.add('active');
+        });
+    
+        // Cerrar modal de registro
+        closeSignUpModal.addEventListener('click', () => {
+            signUpModal.classList.remove('active');
+        });
+    
+        // Mostrar descripción del rol al seleccionarlo
+        signupRole.addEventListener('change', () => {
+            const selectedRole = signupRole.value;
+            if (roleDescriptions[selectedRole]) {
+                roleDescriptionText.textContent = roleDescriptions[selectedRole];
+                roleDescriptionModal.classList.add('active');
+            }
+        });
+    
+        // Cerrar modal de descripción
+        closeRoleDescriptionModal.addEventListener('click', () => {
+            roleDescriptionModal.classList.remove('active');
+        });
+    
+        // Cerrar modal al hacer clic fuera del contenido
+        window.addEventListener('click', (e) => {
+            if (e.target === roleDescriptionModal) {
+                roleDescriptionModal.classList.remove('active');
+            }
+        });
+    
+        // Redirigir al inicio cuando se envíe el formulario
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evitar el envío real del formulario
+            signUpModal.classList.remove('active'); // Cerrar el modal
+            alert('Te has registrado correctamente');
+            
+            // Obtener el rol seleccionado
+            const selectedRole = signupRole.value;
+            
+            // Redirigir a la página correspondiente según el rol
+            if (selectedRole === 'user') {
+                window.location.href = 'usuario.html'; // Redirigir a la página de usuario
+            } else if (selectedRole === 'admin') {
+                window.location.href = 'admin.html'; // Redirigir a la página de administrador
+            }
+        });
+    </script>
+        <footer>
+        <p>&copy; 2024 NERA'S. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Quejas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function cargarQuejas() {
+            const contenedor = document.getElementById("lista-quejas");
+            const quejas = JSON.parse(localStorage.getItem("quejas")) || [];
+
+            if (quejas.length === 0) {
+                contenedor.innerHTML = "<p>No hay quejas registradas.</p>";
+                return;
+            }
+
+            contenedor.innerHTML = "";
+            quejas.forEach((queja, index) => {
+                const item = document.createElement("li");
+                item.textContent = `#${index + 1}: ${queja}`;
+                contenedor.appendChild(item);
+            });
+        }
+
+        function limpiarQuejas() {
+            localStorage.removeItem("quejas");
+            alert("Todas las quejas han sido eliminadas.");
+            cargarQuejas();
+        }
+
+        // Escuchar el evento de cambio en localStorage
+        window.addEventListener("storage", cargarQuejas);
+
+        document.addEventListener("DOMContentLoaded", cargarQuejas);
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Administración de Quejas</h1>
+        <nav>
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="configuracion.html">Configuración Avanzada</a></li>
+                <li><a href="monitoreo.html">Monitoreo de Red</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="soporte.html" class="active">Administración</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Listado de Quejas Recibidas</h2>
+        <ul id="lista-quejas"></ul>
+        <button onclick="limpiarQuejas()">Eliminar Todas las Quejas</button>
+    </main>
+    <footer>
+        <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

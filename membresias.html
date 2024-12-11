@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Efficiency and Routing Analysis - Membresías</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Bienvenido a Network Efficiency and Routing Analysis</h1>
+        <p>Obtén acceso exclusivo a contenido premium.</p>
+        <nav>
+            <ul>
+                <li><a href="login.html">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Membresías Disponibles</h2>
+        <section class="membresias">
+            <div class="membresia" id="prueba-gratuita">
+                <h3>Prueba gratuita</h3>
+                <p>Para los nuevos usuarios </p>
+                <button onclick="subscribe('Prueba gratuita')">Suscribirse</button>
+            </div>
+            <div class="membresia" id="basico">
+                <h3>Básico</h3>
+                <p>Acceso limitado a contenido básico.</p>
+                <p>Precio: $5/mes</p>
+                <button onclick="subscribe('Básico')">Suscribirse</button>
+            </div>
+            <div class="membresia" id="premium">
+                <h3>Premium</h3>
+                <p>Acceso completo a todos los recursos avanzados.</p>
+                <p>Precio: $15/mes</p>
+                <button onclick="subscribe('Premium')">Suscribirse</button>
+            </div>
+            <div class="membresia" id="vip">
+                <h3>VIP</h3>
+                <p>Acceso completo con soporte y servicios exclusivos.</p>
+                <p>Precio: $30/mes</p>
+                <button onclick="subscribe('VIP')">Suscribirse</button>
+            </div>
+            <div class="membresia" id="empresarial">
+                <h3>Empresarial</h3>
+                <p>Acceso para equipos con herramientas colaborativas.</p>
+                <p>Precio: $50/mes</p>
+                <button onclick="subscribe('Empresarial')">Suscribirse</button>
+            </div>
+            <div class="membresia" id="estudiantil-plan">
+                <h3>Estudiantil</h3>
+                <p>Recursos a precio reducido para estudiantes.</p>
+                <p>Precio: $10/mes</p>
+                <button onclick="subscribe('Estudiantil')">Suscribirse</button>
+            </div>
+            
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Formulario de Registro</h2>
+            <form id="subscriptionForm">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="plan">Plan Seleccionado:</label>
+                <input type="text" id="plan" name="plan" readonly>
+                <button type="submit" class="btn">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function subscribe(plan) {
+            const modal = document.getElementById("modal");
+            const planInput = document.getElementById("plan");
+            modal.style.display = "flex";
+            planInput.value = plan; // Asignar el plan seleccionado al input
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "none";
+        }
+
+        document.getElementById("subscriptionForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("¡Registro completado con éxito!");
+            closeModal();
+        });
+    </script>
+</body>
+
+</html>

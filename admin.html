@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NERA'S - Network Efficiency and Routing Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="img/WhatsApp Image 2024-10-31 at 4.57.29 PM.jpeg" type="image/png"> <!-- Favicon -->
+    <style></style>
+</head>
+
+<body>
+    <header>
+        <img src="img/WhatsApp Image 2024-10-31 at 4.57.29 PM.jpeg" alt="NERA'S Logo">
+        <h1>Network Efficiency and Routing Analysis</h1>
+
+        <!-- Ícono de Cerrar sesión -->
+        <a href="javascript:void(0);" id="logoutLink" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="caracteristicas.html">Características</a></li>
+                <li><a href="acercade.html">Acerca de</a></li>
+                <li><a href="configuracion.html">Configuración Avanzada</a></li>
+                <li><a href="monitoreo.html">Monitoreo de Red</a></li>
+                <li><a href="soporte.html">Soporte Técnico</a></li>
+              
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Control de Zona Wi-Fi</h2>
+
+        <button id="startWifiZone" class="btn"><i class="fas fa-wifi"></i> Iniciar Zona Wi-Fi</button>
+
+        <button id="enableAI" class="btn"><i class="fas fa-robot"></i> Habilitar IA</button>
+        <button id="toggleAI" class="btn"><i class="fas fa-play-circle"></i> Iniciar Conexión Automática (IA)</button>
+
+        <button id="clearDevices" class="btn"><i class="fas fa-trash-alt"></i> Eliminar Todos los Dispositivos</button>
+
+        <p id="wifiStatus">Estado: Zona Wi-Fi no activa</p>
+
+        <h2>Agregar Dispositivo Manualmente</h2>
+        <form id="manualAddForm">
+            <label for="manualDeviceName">Nombre del Dispositivo:</label>
+            <input type="text" id="manualDeviceName" placeholder="Nombre del dispositivo" required>
+
+            <label for="manualDeviceIp">IP del Dispositivo:</label>
+            <input type="text" id="manualDeviceIp" placeholder="192.168.1.x" required>
+
+            <button type="button" id="addDeviceManually" class="btn"><i class="fas fa-plus-circle"></i> Agregar Dispositivo</button>
+        </form>
+
+        <h2>Dispositivos Conectados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>IP</th>
+                    <th>Estado</th>
+                    <th>Amenaza</th>
+                    <th>Bloqueo</th>
+                    <th>Eliminacion</th>
+                </tr>
+            </thead>
+            <tbody id="deviceTableBody">
+                <!-- Aquí se mostrarán los dispositivos conectados -->
+            </tbody>
+        </table>
+
+       
+
+        <h2>Alertas de Amenazas</h2>
+        <ul id="threatAlerts">
+            <!-- Aquí se mostrarán las alertas de amenazas -->
+        </ul>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NERA'S. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Función de cierre de sesión
+        function logout() {
+            // Aquí puedes realizar alguna lógica de cierre de sesión si es necesario,
+            // por ejemplo, borrar cookies, almacenamiento local, o simplemente redirigir.
+            window.location.href = "index.html"; // Redirigir al index
+        }
+    </script>
+</body>
+
+</html>
