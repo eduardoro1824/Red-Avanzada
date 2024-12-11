@@ -6,15 +6,13 @@
     <title>index Page</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-   
-        /* Modificar el estilo del formulario para cambiar el orden */
         #signupForm {
             display: flex;
             flex-direction: column;
         }
 
         #signupForm select {
-            order: -1; /* Esto coloca el campo "Rol" al principio */
+            order: -1;
         }
     </style>
 </head>
@@ -28,7 +26,6 @@
         <div class="screen welcome-screen active">
             <div class="content">
                 <h1>Bienvenido</h1>
-                <p></p>
                 <div class="buttons">
                     <button class="btn" id="openSignInModal">Iniciar Sesión</button>
                     <button class="btn" id="openSignUpModal">Registrarse</button>
@@ -38,10 +35,30 @@
         </div>
     </div>
 
+    <!-- Modal for Sign In -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <h2>Iniciar Sesión</h2>
+            <form id="signinForm">
+                <label>Nombre del Usuario</label>
+                <input type="text" id="signinUsername" placeholder="Enter your username">
+                <label>Contraseña</label>
+                <input type="password" id="signinPassword" placeholder="Enter your password">
+                <button type="submit" class="btn">Iniciar Sesión</button>
+            </form>
+            <div class="social-login">
+                <button class="btn-google"><img src="img/google-icon.png" alt="Google"> Google</button>
+                <button class="btn-facebook"><img src="img/facebook-icon.png" alt="Facebook"> Facebook</button>
+                <button class="btn-instagram"><img src="img/instagram-icon.png" alt="Instagram"> Instagram</button>
+            </div>
+            <button type="button" class="close-modal" id="closeSignInModal">X</button>
+        </div>
+    </div>
+
     <!-- Modal for Sign Up -->
     <div class="modal" id="signUpModal">
         <div class="modal-content2">
-            <h2>Registrarse</h2><br>
+            <h2>Registrarse</h2>
             <label>Rol</label>
             <select id="signupRole">
                 <option value="user">Usuario</option>
@@ -56,10 +73,14 @@
                 <input type="email" id="signupEmail" placeholder="Enter your email">
                 <label>Teléfono</label>
                 <input type="tel" id="signupPhone" placeholder="Enter your phone number">
-            
                 <button type="submit" class="btn">Registrarse</button>
             </form>
-            <button type="button" class="close-modal2" id="closeSignUpModal">x</button>
+            <div class="social-login">
+                <button class="btn-google"><img src="img/gmail.png" alt="Google"> Google</button>
+                <button class="btn-facebook"><img src="img/facebook.png" alt="Facebook"> Facebook</button>
+                <button class="btn-instagram"><img src="img/instagram (1).png" alt="Instagram"> Instagram</button>
+            </div>
+            <button type="button" class="close-modal2" id="closeSignUpModal">X</button>
         </div>
     </div>
 
@@ -73,32 +94,40 @@
     </div>
 
     <script>
+        const signInModal = document.getElementById('signInModal');
+        const openSignInModal = document.getElementById('openSignInModal');
+        const closeSignInModal = document.getElementById('closeSignInModal');
+
         const signUpModal = document.getElementById('signUpModal');
         const openSignUpModal = document.getElementById('openSignUpModal');
         const closeSignUpModal = document.getElementById('closeSignUpModal');
-    
+
         const signupRole = document.getElementById('signupRole');
         const roleDescriptionModal = document.getElementById('roleDescriptionModal');
         const roleDescriptionText = document.getElementById('roleDescriptionText');
         const closeRoleDescriptionModal = document.getElementById('closeRoleDescriptionModal');
-    
-        // Descripciones de roles
+
         const roleDescriptions = {
             user: "Usuario: Acceso limitado a funcionalidades básicas de la plataforma.",
             admin: "Administrador: Control total sobre las configuraciones y usuarios."
         };
-    
-        // Abrir modal de registro
+
+        openSignInModal.addEventListener('click', () => {
+            signInModal.classList.add('active');
+        });
+
+        closeSignInModal.addEventListener('click', () => {
+            signInModal.classList.remove('active');
+        });
+
         openSignUpModal.addEventListener('click', () => {
             signUpModal.classList.add('active');
         });
-    
-        // Cerrar modal de registro
+
         closeSignUpModal.addEventListener('click', () => {
             signUpModal.classList.remove('active');
         });
-    
-        // Mostrar descripción del rol al seleccionarlo
+
         signupRole.addEventListener('change', () => {
             const selectedRole = signupRole.value;
             if (roleDescriptions[selectedRole]) {
@@ -106,38 +135,33 @@
                 roleDescriptionModal.classList.add('active');
             }
         });
-    
-        // Cerrar modal de descripción
+
         closeRoleDescriptionModal.addEventListener('click', () => {
             roleDescriptionModal.classList.remove('active');
         });
-    
-        // Cerrar modal al hacer clic fuera del contenido
+
         window.addEventListener('click', (e) => {
             if (e.target === roleDescriptionModal) {
                 roleDescriptionModal.classList.remove('active');
             }
         });
-    
-        // Redirigir al inicio cuando se envíe el formulario
+
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', (event) => {
-            event.preventDefault(); // Evitar el envío real del formulario
-            signUpModal.classList.remove('active'); // Cerrar el modal
+            event.preventDefault();
+            signUpModal.classList.remove('active');
             alert('Te has registrado correctamente');
-            
-            // Obtener el rol seleccionado
+
             const selectedRole = signupRole.value;
-            
-            // Redirigir a la página correspondiente según el rol
             if (selectedRole === 'user') {
-                window.location.href = 'usuario.html'; // Redirigir a la página de usuario
+                window.location.href = 'usuario.html';
             } else if (selectedRole === 'admin') {
-                window.location.href = 'admin.html'; // Redirigir a la página de administrador
+                window.location.href = 'admin.html';
             }
         });
     </script>
-        <footer>
+
+    <footer>
         <p>&copy; 2024 NERA'S. Todos los derechos reservados.</p>
     </footer>
 </body>
